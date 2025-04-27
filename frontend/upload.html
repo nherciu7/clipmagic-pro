@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upload Video - ClipMagic Pro</title>
+  <!-- Import Poppins font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0d1117;
+      color: #f1f5f9;
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-shadow: 0 0 8px #8b5cf6;
+      color: #6366f1;
+      text-align: center;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 320px;
+      gap: 15px;
+    }
+
+    input[type="file"],
+    input[type="text"] {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      background-color: #1f2937;
+      color: #f1f5f9;
+    }
+
+    .submit-btn {
+      padding: 12px;
+      background-color: #6366f1;
+      color: #0d1117;
+      font-weight: 600;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: #8b5cf6;
+      transform: scale(1.05);
+      box-shadow: 0 0 12px #8b5cf6;
+    }
+
+    .note {
+      font-size: 0.9rem;
+      color: #94a3b8;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Upload Your Video or Paste a Link</h2>
+
+  <form id="upload-form">
+    <input type="file" id="video" accept="video/*" />
+    <input type="text" id="youtubeLink" placeholder="Paste YouTube Link (optional)" />
+    <button class="submit-btn" type="submit">Start Magic</button>
+    <p class="note">Max file size: 500MB</p>
+  </form>
+
+  <script>
+    const form = document.getElementById('upload-form');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const fileInput = document.getElementById('video');
+      const linkInput = document.getElementById('youtubeLink');
+
+      const formData = new FormData();
+
+      if (fileInput.files.length > 0) {
+        formData.append('video', fileInput.files[0]);
+      }
+      if (linkInput.value.trim() !== "") {
+        formData.append('youtubeLink', linkInput.value.trim());
+      }
+
+      const token = localStorage.getItem('token');
+
+      const response = await fetch('http://localhost:3000/upload', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        window.location.href = "clips.html"; // Redirect to clips page after successful upload
+      } else {
+        alert(data.message || 'Upload failed. Please try again.');
+      }
+    });
+  </script>
+
+</body>
+</html>

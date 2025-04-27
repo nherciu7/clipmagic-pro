@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClipMagic Pro</title>
+  <!-- Import Poppins font from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0d1117;
+      color: #f1f5f9;
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      color: #6366f1;
+      text-shadow: 0 0 8px #8b5cf6;
+      margin: 0;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      color: #f1f5f9;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #22d3ee; /* neon cyan on hover */
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    main h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #f1f5f9;
+      text-shadow: 0 0 6px #6366f1;
+    }
+
+    .upload-btn {
+      padding: 15px 40px;
+      background-color: #6366f1;
+      color: #0d1117;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .upload-btn:hover {
+      background-color: #8b5cf6;
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #8b5cf6;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #475569;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>ClipMagic Pro</h1>
+    <nav>
+      <a href="login.html">Login</a>
+      <a href="signup.html">Sign Up</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Turn Long Videos into Viral Shorts 🚀</h2>
+    <button class="upload-btn" onclick="startUpload()">Start Upload</button>
+  </main>
+
+  <footer>
+    © 2025 ClipMagic Pro. All rights reserved.
+  </footer>
+
+  <script>
+    function startUpload() {
+      const token = localStorage.getItem('token');
+      if (token) {
+        window.location.href = "upload.html";
+      } else {
+        window.location.href = "login.html";
+      }
+    }
+  </script>
+
+</body>
+</html>

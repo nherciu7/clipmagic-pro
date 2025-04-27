@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Clips - ClipMagic Pro</title>
+  <!-- Import Poppins font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0d1117;
+      color: #f1f5f9;
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-shadow: 0 0 8px #8b5cf6;
+      color: #6366f1;
+      text-align: center;
+    }
+
+    .clips-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .clip-card {
+      background-color: #1f2937;
+      padding: 15px;
+      border-radius: 8px;
+      width: 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 0 10px rgba(99, 102, 241, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .clip-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 15px #8b5cf6;
+    }
+
+    video {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .download-btn {
+      padding: 10px 20px;
+      background-color: #6366f1;
+      color: #0d1117;
+      font-weight: 600;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .download-btn:hover {
+      background-color: #8b5cf6;
+      transform: scale(1.05);
+      box-shadow: 0 0 12px #8b5cf6;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #475569;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Your Generated Clips 🎬</h2>
+
+  <div class="clips-container" id="clips-container">
+    <!-- Clips will be dynamically added here -->
+  </div>
+
+  <footer>
+    © 2025 ClipMagic Pro. All rights reserved.
+  </footer>
+
+  <script>
+    // Dummy data for testing — later you'll replace this with real backend fetch
+    const clips = [
+      { url: 'https://www.w3schools.com/html/mov_bbb.mp4' },
+      { url: 'https://www.w3schools.com/html/movie.mp4' }
+    ];
+
+    const container = document.getElementById('clips-container');
+
+    clips.forEach(clip => {
+      const card = document.createElement('div');
+      card.className = 'clip-card';
+
+      const video = document.createElement('video');
+      video.src = clip.url;
+      video.controls = true;
+
+      const downloadBtn = document.createElement('a');
+      downloadBtn.href = clip.url;
+      downloadBtn.download = "";
+      downloadBtn.innerHTML = 'Download Clip';
+      downloadBtn.className = 'download-btn';
+
+      card.appendChild(video);
+      card.appendChild(downloadBtn);
+      container.appendChild(card);
+    });
+
+    // Later, replace the above dummy "clips" array with real API call:
+    /*
+    fetch('http://localhost:3000/get-clips', {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      // data.clips.forEach(...)
+    });
+    */
+  </script>
+
+</body>
+</html>
