@@ -1,5 +1,0 @@
-#openai-whisper
-psycopg2-binary
-python-dotenv
-ffmpeg-python
-moviepy==2.1.2
