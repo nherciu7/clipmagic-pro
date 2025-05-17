@@ -1,3 +1,4 @@
+import json
 import os
 import whisper
 import psycopg2
@@ -44,6 +45,7 @@ if not os.path.exists(absolute_path):
 
 # Transcribe using Whisper
 result = model.transcribe(absolute_path)
+
 segments = result['segments']
 print("🧠 Transcription complete")
 
@@ -77,3 +79,12 @@ cursor.execute(
 
 conn.commit()
 print("✅ Clip saved and database updated.")
+
+
+
+# Save transcript JSON next to the video
+json_path = os.path.splitext(absolute_path)[0] + ".json"  # replaces .mp4 with .json in full path
+with open(json_path, "w", encoding="utf-8") as f:
+    json.dump(result, f, ensure_ascii=False, indent=2)
+
+print(f"📝 Transcript saved as {json_path}")
